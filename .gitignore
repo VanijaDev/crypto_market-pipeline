@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Airflow
+airflow/logs/
+airflow/plugins/__pycache__/
+
+# Docker
+docker-compose.override.yml
+
+# Data (don't commit raw data files)
+data/
+
+# Claude Code local preferences
+CLAUDE.local.md
