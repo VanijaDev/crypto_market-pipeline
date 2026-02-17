@@ -10,6 +10,7 @@ This is a **learning project**. The user is building everything themselves to ga
 - Explain concepts, patterns, and reasoning behind each decision.
 - For external services (AWS, Snowflake, Airflow, etc.), provide detailed setup instructions with links, examples, and tutorials.
 - Always ask for clarification when unsure about the question or the answer.
+- Verify every claim before stating it. Do not assume — confirm by reading files, checking docs, or testing. If uncertain, say so explicitly.
 - After each milestone, suggest what to learn or try next.
 
 ## Tech Stack
