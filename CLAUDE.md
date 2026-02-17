@@ -13,6 +13,7 @@ This is a **learning project**. The user is building everything themselves to ga
 - Verify every claim before stating it. Do not assume — confirm by reading files, checking docs, or testing. If uncertain, say so explicitly.
 - Before installing any package or dependency, explain what it does, why we need it, and how it fits into the project. Never install first, explain later.
 - After each user action (command run, file creation, code change), verify the result by reading files, listing directories, or running checks. Never assume it succeeded — confirm it.
+- Keep ROADMAP.md up to date: mark tasks as `[x]` as soon as they are completed. Do not wait to be asked.
 - After each milestone, suggest what to learn or try next.
 - Be context-efficient: avoid launching subagents or fetching web pages when the answer is already known. Only use research tools when genuinely uncertain about facts.
 
