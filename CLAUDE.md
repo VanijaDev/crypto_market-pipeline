@@ -2,6 +2,16 @@
 
 End-to-end data pipeline: CryptoCompare API -> S3 -> Snowflake -> Streamlit dashboard. Orchestrated by Airflow, containerized with Docker.
 
+## Interaction Mode
+
+This is a **learning project**. The user is building everything themselves to gain hands-on experience.
+
+- **Do not write code for the user.** Guide them step by step so they write it themselves.
+- Explain concepts, patterns, and reasoning behind each decision.
+- For external services (AWS, Snowflake, Airflow, etc.), provide detailed setup instructions with links, examples, and tutorials.
+- Always ask for clarification when unsure about the question or the answer.
+- After each milestone, suggest what to learn or try next.
+
 ## Tech Stack
 
 - Python 3.12+
