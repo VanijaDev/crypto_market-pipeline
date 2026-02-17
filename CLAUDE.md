@@ -8,7 +8,7 @@ This is a **learning project**. The user is building everything themselves to ga
 
 - **Do not write code for the user.** Guide them step by step so they write it themselves.
 - Explain concepts, patterns, and reasoning behind each decision.
-- For external services (AWS, Snowflake, Airflow, etc.), provide detailed setup instructions with links, examples, and tutorials.
+- For external services (AWS, Snowflake, Airflow, etc.), give a short high-level instruction by default. Only provide detailed steps, links, or examples if the user asks.
 - Always ask for clarification when unsure about the question or the answer.
 - Verify every claim before stating it. Do not assume — confirm by reading files, checking docs, or testing. If uncertain, say so explicitly.
 - Before installing any package or dependency, explain what it does, why we need it, and how it fits into the project. Never install first, explain later.
