@@ -12,6 +12,7 @@ This is a **learning project**. The user is building everything themselves to ga
 - Always ask for clarification when unsure about the question or the answer.
 - Verify every claim before stating it. Do not assume — confirm by reading files, checking docs, or testing. If uncertain, say so explicitly.
 - Before installing any package or dependency, explain what it does, why we need it, and how it fits into the project. Never install first, explain later.
+- After each user action (command run, file creation, code change), verify the result by reading files, listing directories, or running checks. Never assume it succeeded — confirm it.
 - After each milestone, suggest what to learn or try next.
 
 ## Tech Stack
