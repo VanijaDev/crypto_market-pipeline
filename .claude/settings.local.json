@@ -3,7 +3,10 @@
     "allow": [
       "WebFetch(domain:www.anthropic.com)",
       "WebFetch(domain:www.humanlayer.dev)",
-      "WebFetch(domain:www.builder.io)"
+      "WebFetch(domain:www.builder.io)",
+      "WebFetch(domain:min-api.cryptocompare.com)",
+      "WebFetch(domain:www.cryptocompare.com)",
+      "WebFetch(domain:apipheny.io)"
     ]
   }
 }

@@ -33,3 +33,4 @@ data/
 
 # Claude Code local preferences
 CLAUDE.local.md
+.claude/settings.local.json
