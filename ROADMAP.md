@@ -1,11 +1,11 @@
 # Development Roadmap
 
-## Phase 1: Project Setup
-- [ ] Create Python virtual environment (3.12+)
-- [ ] Install initial dependencies (httpx, python-dotenv)
-- [ ] Create project folder structure
-- [ ] Create `.env` file (from template)
-- [ ] Git initial commit
+## Phase 1: Project Setup ✅
+- [x] Create Python virtual environment (3.12+)
+- [x] Install initial dependencies (httpx, python-dotenv)
+- [x] Create project folder structure
+- [x] Create `.env` file (from template)
+- [x] Git initial commit
 
 ## Phase 2: CoinGecko API
 - [ ] Register at CoinGecko
