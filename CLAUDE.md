@@ -51,6 +51,16 @@ docker/            # Dockerfiles and docker-compose
 # airflow dags test <dag_id>            # Test a DAG
 ```
 
+## Code Quality Standard
+
+Always guide the user toward production-quality code. When reviewing or suggesting code, proactively point out missing best practices even if not asked. This includes:
+
+- Input validation and early guards (e.g. raise on missing config)
+- Meaningful error messages that explain what's wrong and how to fix it
+- Proper HTTP error handling (check status codes, handle timeouts)
+- No magic strings or hardcoded values — use constants or config
+- Separation of concerns — fetching, validation, and logging in distinct layers
+
 ## Code Conventions
 
 - Type hints on all function signatures
