@@ -68,3 +68,8 @@ docker/            # Dockerfiles and docker-compose
 - `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_PASSWORD`, `SNOWFLAKE_DATABASE` -- Snowflake connection
 
 Never commit `.env` files or credentials.
+- Keep `.env.example` in sync with `.env`: whenever a key is added or removed from `.env`, update `.env.example` immediately (key present, value empty).
+
+## Scope of Actions
+
+- **NEVER modify any files outside this repository** without asking the user for confirmation **twice** before proceeding. This is a hard rule with no exceptions.
