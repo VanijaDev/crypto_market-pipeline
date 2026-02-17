@@ -1,6 +1,6 @@
 # Crypto Market Pipeline
 
-End-to-end data pipeline: CryptoCompare API -> S3 -> Snowflake -> Streamlit dashboard. Orchestrated by Airflow, containerized with Docker.
+End-to-end data pipeline: CoinGecko API -> S3 -> Snowflake -> Streamlit dashboard. Orchestrated by Airflow, containerized with Docker.
 
 ## Interaction Mode
 
@@ -59,7 +59,7 @@ docker/            # Dockerfiles and docker-compose
 
 ## Environment Variables
 
-- `CRYPTOCOMPARE_API_KEY` -- API key for CryptoCompare
+- `COINGECKO_API_KEY` -- API key for CoinGecko (free Demo plan)
 - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET` -- S3 access
 - `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_PASSWORD`, `SNOWFLAKE_DATABASE` -- Snowflake connection
 

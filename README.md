@@ -8,7 +8,7 @@ A portfolio project to get hands-on experience building an end-to-end data engin
 
 ## How It Works
 
-1. **Ingest** -- A Python script fetches daily crypto data from the [CryptoCompare API](https://min-api.cryptocompare.com/)
+1. **Ingest** -- A Python script fetches daily crypto data from the [CoinGecko API](https://www.coingecko.com/en/api)
 2. **Store** -- Raw data lands in AWS S3 in a partitioned format
 3. **Orchestrate** -- Apache Airflow runs the workflow automatically every day
 4. **Transform & Load** -- Processed data is loaded into a Snowflake data warehouse

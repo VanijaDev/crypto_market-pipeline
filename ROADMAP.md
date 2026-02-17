@@ -7,9 +7,9 @@
 - [ ] Create `.env` file (from template)
 - [ ] Git initial commit
 
-## Phase 2: CryptoCompare API
-- [ ] Register at CryptoCompare
-- [ ] Get free API key
+## Phase 2: CoinGecko API
+- [ ] Register at CoinGecko
+- [ ] Get free Demo API key
 - [ ] Save API key in `.env`
 - [ ] Write Python script to fetch daily OHLCV data
 - [ ] Test locally, inspect and understand the response
