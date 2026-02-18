@@ -31,4 +31,4 @@ if __name__ == "__main__":
   data = fetch_prices()
   upload_to_s3(data, s3_path)
 
-  print(f"Uploaded {len(data)} coins to s3://{config['aws_s3_bucket']}/{s3_path}")
+  print(f"✅ Uploaded {len(data)} coins to s3://{config['aws_s3_bucket']}/{s3_path}")
