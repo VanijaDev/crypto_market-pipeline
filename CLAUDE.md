@@ -83,3 +83,4 @@ Never commit `.env` files or credentials.
 ## Scope of Actions
 
 - **NEVER modify any files outside this repository** without asking the user for confirmation **twice** before proceeding. This is a hard rule with no exceptions.
+- **NEVER run git commit or git push.** Only tell the user what git commands to run — never execute them directly.

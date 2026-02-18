@@ -27,8 +27,8 @@
 - [x] Save AWS credentials in `.env`
 - [x] Write upload script (raw JSON, partitioned by date)
 - [x] Test: fetch from API -> upload to S3
-- [ ] Write unit tests for `fetch_prices` (mock `httpx.get`)
-- [ ] Write unit tests for `upload_to_s3` (mock `boto3.client`)
+- [x] Write unit tests for `fetch_prices` (mock `httpx.get`)
+- [x] Write unit tests for `upload_to_s3` (mock `boto3.client`)
 
 ## Phase 4: Data Transformation
 - [ ] Design clean data schema (columns, types) — keep: `id`, `symbol`, `name`, `image`, `current_price`, `high_24h`, `low_24h`, `total_volume`, `market_cap`, `market_cap_rank`, `price_change_percentage_24h`, `circulating_supply`, `last_updated`; drop: `roi`, `ath`, `atl` and related
