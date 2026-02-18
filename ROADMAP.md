@@ -11,19 +11,27 @@
 - [x] Register at CoinGecko
 - [x] Get free Demo API key
 - [x] Save API key in `.env`
-- [ ] Write Python script to fetch daily OHLCV data
-- [ ] Test locally, inspect and understand the response
+- [x] Write Python script to fetch daily market snapshot data (`/coins/markets` endpoint)
+- [x] Test locally, inspect and understand the response
+- [x] Clean up `fetch_prices.py`: type hints, `raise_for_status()`, central config
+
+> **API note:** Using `/coins/markets` endpoint — returns a daily snapshot per coin (not historical OHLCV).
+> Each record includes: `id`, `symbol`, `name`, `image`, `current_price`, `high_24h`, `low_24h`,
+> `total_volume`, `market_cap`, `market_cap_rank`, `price_change_percentage_24h`,
+> `circulating_supply`, `last_updated`. Fields like `roi`, `ath`, `atl` will be dropped in transformation.
 
 ## Phase 3: AWS S3 Storage
-- [ ] Create AWS account (free tier)
-- [ ] Create IAM user with S3 permissions
-- [ ] Create S3 bucket
-- [ ] Save AWS credentials in `.env`
-- [ ] Write upload script (raw JSON, partitioned by date)
-- [ ] Test: fetch from API -> upload to S3
+- [x] Create AWS account (free tier)
+- [x] Create IAM user with S3 permissions
+- [x] Create S3 bucket
+- [x] Save AWS credentials in `.env`
+- [x] Write upload script (raw JSON, partitioned by date)
+- [x] Test: fetch from API -> upload to S3
+- [ ] Write unit tests for `fetch_prices` (mock `httpx.get`)
+- [ ] Write unit tests for `upload_to_s3` (mock `boto3.client`)
 
 ## Phase 4: Data Transformation
-- [ ] Design clean data schema (columns, types)
+- [ ] Design clean data schema (columns, types) — keep: `id`, `symbol`, `name`, `image`, `current_price`, `high_24h`, `low_24h`, `total_volume`, `market_cap`, `market_cap_rank`, `price_change_percentage_24h`, `circulating_supply`, `last_updated`; drop: `roi`, `ath`, `atl` and related
 - [ ] Write transformation logic (raw JSON -> clean tabular format)
 - [ ] Write tests for transformations
 

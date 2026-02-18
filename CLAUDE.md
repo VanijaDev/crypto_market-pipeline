@@ -44,7 +44,7 @@ docker/            # Dockerfiles and docker-compose
 ## Commands
 
 ```bash
-# TODO: fill in as implementation progresses
+python -m src.ingestion.fetch_prices     # Fetch prices from CoinGecko
 # python -m pytest tests/               # Run tests
 # docker-compose up                     # Start all services
 # streamlit run dashboard/app.py        # Run dashboard locally
