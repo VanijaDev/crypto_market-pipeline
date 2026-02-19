@@ -46,7 +46,7 @@ docker/            # Dockerfiles and docker-compose
 ## Commands
 
 ```bash
-python -m src.extract.fetch_prices       # Fetch prices from CoinGecko
+python -m src.extract.fetch_prices      # Fetch prices from CoinGecko
 # python -m pytest tests/               # Run tests
 # docker-compose up                     # Start all services
 # streamlit run dashboard/app.py        # Run dashboard locally
@@ -80,6 +80,7 @@ Always guide the user toward production-quality code. When reviewing or suggesti
 - `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_PASSWORD`, `SNOWFLAKE_DATABASE` -- Snowflake connection
 
 Never commit `.env` files or credentials.
+
 - Keep `.env.example` in sync with `.env`: whenever a key is added or removed from `.env`, update `.env.example` immediately (key present, value empty).
 
 ## Scope of Actions

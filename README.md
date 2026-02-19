@@ -16,12 +16,12 @@ A portfolio project to get hands-on experience building an end-to-end data engin
 
 ## Tech Stack
 
-| Layer | Tool | Role |
-|---|---|---|
-| Data ingestion | Python | API calls, response parsing |
-| Orchestration | Apache Airflow | Daily scheduled jobs |
-| Cloud storage | AWS S3 | Raw and partitioned data |
-| Data warehouse | Snowflake | Clean data for analytics |
-| Dashboard | Streamlit | Interactive visualization |
-| Containerization | Docker | Reproducible environments |
-| Deployment | Railway / Render | Hosts Airflow + dashboard publicly |
+| Layer            | Tool             | Role                               |
+| ---------------- | ---------------- | ---------------------------------- |
+| Data extraction  | Python           | API calls, response parsing        |
+| Orchestration    | Apache Airflow   | Daily scheduled jobs               |
+| Cloud storage    | AWS S3           | Raw and partitioned data           |
+| Data warehouse   | Snowflake        | Clean data for analytics           |
+| Dashboard        | Streamlit        | Interactive visualization          |
+| Containerization | Docker           | Reproducible environments          |
+| Deployment       | Railway / Render | Hosts Airflow + dashboard publicly |
