@@ -1,13 +1,45 @@
 import json
 import boto3
-from typing import Any
+import csv
+from io import StringIO
 from src.utils.config import get_config
 from src.extract.fetch_prices import fetch_prices
 from mypy_boto3_s3 import S3Client
 from datetime import datetime, timezone
 
 
-def upload_to_s3(data: list[dict[str, Any]], s3_object_path: str) -> None:
+def upload_json_to_s3(data: list[dict[str, object]], path: str) -> None:
+  """
+  Uploads json data to S3.
+  
+  :param data: The data to upload.
+  :param path: The S3 path to upload the data to.
+  """
+  _upload_bytes_to_s3(json.dumps(data).encode("utf-8"), path, "application/json")
+
+
+def upload_csv_to_s3(data: list[dict[str, object]], path: str) -> None:
+  """
+  Uploads csv data to S3.
+  
+  :param data: The CSV data to upload.
+  :param path: The S3 path to upload the data to.
+  """
+  buffer = StringIO()
+  writer = csv.DictWriter(buffer, fieldnames=data[0].keys())
+  writer.writeheader()
+  writer.writerows(data)
+  _upload_bytes_to_s3(buffer.getvalue().encode("utf-8"), path, "text/csv")
+
+
+def _upload_bytes_to_s3(data: bytes, path: str, content_type: str) -> None:
+  """
+  Uploads bytes data to S3.
+  
+  :param data: The bytes data to upload.
+  :param path: The S3 path to upload the data to.
+  :param content_type: The content type of the data.
+  """
   config = get_config()
   client: S3Client = boto3.client( # type: ignore
     "s3",
@@ -17,11 +49,11 @@ def upload_to_s3(data: list[dict[str, Any]], s3_object_path: str) -> None:
 
   client.put_object(
     Bucket=config["aws_s3_bucket"],
-    Key=s3_object_path,
-    Body=json.dumps(data).encode("utf-8"),
-    ContentType="application/json"
+    Key=path,
+    Body=data,
+    ContentType=content_type
   )
-
+  
 # To test: python -m src.load.upload_to_s3
 if __name__ == "__main__":
   config = get_config()
@@ -29,6 +61,6 @@ if __name__ == "__main__":
   s3_path = f"raw/prices/{now.year}/{now.month:02d}/{now.day:02d}/prices.json"
 
   data = fetch_prices()
-  upload_to_s3(data, s3_path)
+  upload_json_to_s3(data, s3_path)
 
-  print(f"✅ Uploaded {len(data)} coins to s3://{config['aws_s3_bucket']}/{s3_path}")
+  print(f"✅ Uploaded json with {len(data)} coins to s3://{config['aws_s3_bucket']}/{s3_path}")
