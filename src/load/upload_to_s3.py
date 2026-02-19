@@ -2,7 +2,7 @@ import json
 import boto3
 from typing import Any
 from src.utils.config import get_config
-from src.ingestion.fetch_prices import fetch_prices
+from src.extract.fetch_prices import fetch_prices
 from mypy_boto3_s3 import S3Client
 from datetime import datetime, timezone
 
@@ -22,7 +22,7 @@ def upload_to_s3(data: list[dict[str, Any]], s3_object_path: str) -> None:
     ContentType="application/json"
   )
 
-# To test: python -m src.loading.upload_to_s3
+# To test: python -m src.load.upload_to_s3
 if __name__ == "__main__":
   config = get_config()
   now = datetime.now(timezone.utc)

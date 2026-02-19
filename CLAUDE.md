@@ -30,9 +30,9 @@ This is a **learning project**. The user is building everything themselves to ga
 
 ```
 src/
-  ingestion/       # API clients and data fetchers
-  transformation/  # Data cleaning and transformation logic
-  loading/         # S3 and Snowflake loaders
+  extract/         # API clients and data fetchers
+  transform/       # Data cleaning and transformation logic
+  load/            # S3 and Snowflake loaders
   utils/           # Shared helpers (logging, config, retry)
 dags/              # Airflow DAG definitions
 dashboard/         # Streamlit app
@@ -44,7 +44,7 @@ docker/            # Dockerfiles and docker-compose
 ## Commands
 
 ```bash
-python -m src.ingestion.fetch_prices     # Fetch prices from CoinGecko
+python -m src.extract.fetch_prices       # Fetch prices from CoinGecko
 # python -m pytest tests/               # Run tests
 # docker-compose up                     # Start all services
 # streamlit run dashboard/app.py        # Run dashboard locally

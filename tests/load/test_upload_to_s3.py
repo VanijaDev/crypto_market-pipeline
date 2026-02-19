@@ -1,9 +1,9 @@
 import json
 from unittest.mock import patch
-from src.loading.upload_to_s3 import upload_to_s3
+from src.load.upload_to_s3 import upload_to_s3
 
-@patch("src.loading.upload_to_s3.get_config")
-@patch("src.loading.upload_to_s3.boto3.client")
+@patch("src.load.upload_to_s3.get_config")
+@patch("src.load.upload_to_s3.boto3.client")
 def test_upload_to_s3_calls_put_object(mock_boto3_client, mock_config): # type: ignore
   """upload_to_s3() uploads JSON-encoded data to the correct s3 bucket and path."""
 

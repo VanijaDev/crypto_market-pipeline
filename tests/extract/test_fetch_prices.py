@@ -1,12 +1,12 @@
 
 from unittest.mock import patch, MagicMock
-from src.ingestion.fetch_prices import fetch_prices
+from src.extract.fetch_prices import fetch_prices
 import httpx
 import pytest
 
 
-@patch("src.ingestion.fetch_prices.get_config")
-@patch("src.ingestion.fetch_prices.httpx.get")
+@patch("src.extract.fetch_prices.get_config")
+@patch("src.extract.fetch_prices.httpx.get")
 def test_fetch_prices_returns_coin_data(mock_get, mock_config): # type: ignore
   """fetch_prices() returns the parsed JSON list from the API response."""
 
@@ -20,8 +20,8 @@ def test_fetch_prices_returns_coin_data(mock_get, mock_config): # type: ignore
   assert result == fake_coins
 
 
-@patch("src.ingestion.fetch_prices.get_config")
-@patch("src.ingestion.fetch_prices.httpx.get")
+@patch("src.extract.fetch_prices.get_config")
+@patch("src.extract.fetch_prices.httpx.get")
 def test_fetch_prices_calls_correct_url(mock_get, mock_config): # type: ignore
   """fetch_prices() calls the CoinGecko /coins/markets endpoint with correct URL, params, and API key header."""
 
@@ -40,8 +40,8 @@ def test_fetch_prices_calls_correct_url(mock_get, mock_config): # type: ignore
   )
   
 
-@patch("src.ingestion.fetch_prices.get_config")
-@patch("src.ingestion.fetch_prices.httpx.get")
+@patch("src.extract.fetch_prices.get_config")
+@patch("src.extract.fetch_prices.httpx.get")
 def test_fetch_prices_raises_on_http_error(mock_get, mock_config): # type: ignore
   """fetch_prices() propagates HTTPStatusError when the API returns an error status."""
 

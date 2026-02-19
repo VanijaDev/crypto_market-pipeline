@@ -18,7 +18,7 @@ def fetch_prices() -> list[dict[str, Any]]:
   return response.json()
 
 
-# To test: python -m src.ingestion.fetch_prices
+# To test: python -m src.extract.fetch_prices
 if __name__ == "__main__":
   data = fetch_prices()
   print(json.dumps(data, indent=2))
