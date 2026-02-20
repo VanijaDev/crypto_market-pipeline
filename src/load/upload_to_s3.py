@@ -7,6 +7,7 @@ from src.utils.config import get_config
 from src.extract.fetch_prices import fetch_prices
 from mypy_boto3_s3 import S3Client
 from datetime import datetime, timezone
+from src.transform.transform_prices import extract_required_fields_from_raw_json
 
 
 def upload_json_to_s3(data: list[dict[str, Any]], path: str) -> None:
@@ -59,9 +60,13 @@ def _upload_bytes_to_s3(data: bytes, path: str, content_type: str) -> None:
 if __name__ == "__main__":
   config = get_config()
   now = datetime.now(timezone.utc)
-  s3_path = f"raw/prices/{now.year}/{now.month:02d}/{now.day:02d}/prices.json"
 
   data = fetch_prices()
+  s3_path = f"raw/prices/{now.year}/{now.month:02d}/{now.day:02d}/prices.json"
   upload_json_to_s3(data, s3_path)
-
   print(f"✅ Uploaded json with {len(data)} coins to s3://{config['aws_s3_bucket']}/{s3_path}")
+
+  clean_data = extract_required_fields_from_raw_json(data)
+  clean_s3_path = f"clean/prices/{now.year}/{now.month:02d}/{now.day:02d}/prices.csv"
+  upload_csv_to_s3(clean_data, clean_s3_path)
+  print(f"✅ Uploaded cleaned csv with {len(clean_data)} coins to s3://{config['aws_s3_bucket']}/{clean_s3_path}")
