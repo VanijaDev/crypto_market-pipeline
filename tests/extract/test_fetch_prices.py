@@ -1,4 +1,3 @@
-
 from unittest.mock import patch, MagicMock
 from src.extract.fetch_prices import fetch_prices
 import httpx
