@@ -1,6 +1,7 @@
 import json
 import boto3
 import csv
+from typing import Any
 from io import StringIO
 from src.utils.config import get_config
 from src.extract.fetch_prices import fetch_prices
@@ -8,7 +9,7 @@ from mypy_boto3_s3 import S3Client
 from datetime import datetime, timezone
 
 
-def upload_json_to_s3(data: list[dict[str, object]], path: str) -> None:
+def upload_json_to_s3(data: list[dict[str, Any]], path: str) -> None:
   """
   Uploads json data to S3.
   
@@ -18,7 +19,7 @@ def upload_json_to_s3(data: list[dict[str, object]], path: str) -> None:
   _upload_bytes_to_s3(json.dumps(data).encode("utf-8"), path, "application/json")
 
 
-def upload_csv_to_s3(data: list[dict[str, object]], path: str) -> None:
+def upload_csv_to_s3(data: list[dict[str, Any]], path: str) -> None:
   """
   Uploads csv data to S3.
   
