@@ -19,6 +19,7 @@ python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
 s3transfer==0.16.0
 six==1.17.0
+structlog==25.5.0
 types-awscrt==0.31.2
 types-s3transfer==0.16.0
 urllib3==2.6.3
