@@ -5,7 +5,7 @@ logger = structlog.get_logger()
 
 KEEP_FIELDS = ["id", "symbol", "name", "image", "current_price", "high_24h", "low_24h", "total_volume", "market_cap", "market_cap_rank", "price_change_percentage_24h", "circulating_supply", "last_updated"]
 
-def transform_raw_json(data: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def extract_required_fields_from_raw_json(data: list[dict[str, Any]]) -> list[dict[str, Any]]:
   """Transforms raw JSON data from the CoinGecko API to only include the fields we care about."""
   result: list[dict[str, Any]] = []
   for coin in data:

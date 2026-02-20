@@ -1,4 +1,4 @@
-from src.transform.transform_prices import transform_raw_json
+from src.transform.transform_prices import extract_required_fields_from_raw_json
 from typing import Any
 from unittest.mock import patch, call, MagicMock
 
@@ -37,7 +37,7 @@ def test_transform_prices_returns_only_keep_fields_all():
     }
   ]
 
-  result = transform_raw_json(raw_data)
+  result = extract_required_fields_from_raw_json(raw_data)
   assert result == [
     {
       "id": "bitcoin",
@@ -93,7 +93,7 @@ def test_transform_prices_returns_only_keep_fields_some_missing(mock_logger: Mag
   ]
 
   # test return values
-  result = transform_raw_json(raw_data)
+  result = extract_required_fields_from_raw_json(raw_data)
   assert result == [
     {
       "id": "bitcoin",
