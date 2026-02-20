@@ -31,9 +31,9 @@
 - [x] Write unit tests for `upload_to_s3` (mock `boto3.client`)
 
 ## Phase 4: Data Transformation
-- [ ] Design clean data schema (columns, types) — keep: `id`, `symbol`, `name`, `image`, `current_price`, `high_24h`, `low_24h`, `total_volume`, `market_cap`, `market_cap_rank`, `price_change_percentage_24h`, `circulating_supply`, `last_updated`; drop: `roi`, `ath`, `atl` and related
-- [ ] Write transformation logic (raw JSON -> clean tabular format)
-- [ ] Write tests for transformations
+- [x] Design clean data schema (columns, types) — keep: `id`, `symbol`, `name`, `image`, `current_price`, `high_24h`, `low_24h`, `total_volume`, `market_cap`, `market_cap_rank`, `price_change_percentage_24h`, `circulating_supply`, `last_updated`; drop: `roi`, `ath`, `atl` and related
+- [x] Write transformation logic (raw JSON -> clean tabular format)
+- [x] Write tests for transformations
 
 ## Phase 5: Snowflake
 - [ ] Create Snowflake account (free trial)
