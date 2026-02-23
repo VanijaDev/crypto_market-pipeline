@@ -5,25 +5,6 @@ from typing import Any
 
 logger = structlog.get_logger()
 
-class Fields(StrEnum):
-    ID = "id"
-    SYMBOL = "symbol"
-    NAME = "name"
-    IMAGE = "image"
-    CURRENT_PRICE = "current_price"
-    HIGH_24H = "high_24h"
-    LOW_24H = "low_24h"
-    TOTAL_VOLUME = "total_volume"
-    MARKET_CAP = "market_cap"
-    MARKET_CAP_RANK = "market_cap_rank"
-    PRICE_CHANGE_PERCENTAGE_24H = "price_change_percentage_24h"
-    CIRCULATING_SUPPLY = "circulating_supply"
-    LAST_UPDATED = "last_updated"
-    PRICE_RANGE_24H = "price_range_24h"
-    PRICE_RANGE_PCT_24H = "price_range_pct_24h"
-
-KEEP_FIELDS = [Fields.ID, Fields.SYMBOL, Fields.NAME, Fields.IMAGE, Fields.CURRENT_PRICE, Fields.HIGH_24H, Fields.LOW_24H, Fields.TOTAL_VOLUME, Fields.MARKET_CAP, Fields.MARKET_CAP_RANK, Fields.PRICE_CHANGE_PERCENTAGE_24H, Fields.CIRCULATING_SUPPLY, Fields.LAST_UPDATED]
-CRITICAL_FIELDS = [Fields.CURRENT_PRICE, Fields.MARKET_CAP, Fields.MARKET_CAP_RANK, Fields.CIRCULATING_SUPPLY]
 
 ## This was the original cleanup function
 # def extract_required_fields_from_raw_json(data: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -42,6 +23,27 @@ CRITICAL_FIELDS = [Fields.CURRENT_PRICE, Fields.MARKET_CAP, Fields.MARKET_CAP_RA
 
 #   return result
 
+class Fields(StrEnum):
+    ID = "id"
+    SYMBOL = "symbol"
+    NAME = "name"
+    IMAGE = "image"
+    CURRENT_PRICE = "current_price"
+    HIGH_24H = "high_24h"
+    LOW_24H = "low_24h"
+    TOTAL_VOLUME = "total_volume"
+    MARKET_CAP = "market_cap"
+    MARKET_CAP_RANK = "market_cap_rank"
+    PRICE_CHANGE_PERCENTAGE_24H = "price_change_percentage_24h"
+    CIRCULATING_SUPPLY = "circulating_supply"
+    LAST_UPDATED = "last_updated"
+    VOLUME_TO_MARKET_CAP_RATIO = "volume_to_market_cap_ratio"
+    PRICE_POSITION_IN_RANGE = "price_position_in_range"
+    PRICE_DISTANCE_FROM_HIGH_PCT = "price_distance_from_high_pct"
+
+KEEP_FIELDS = [Fields.ID, Fields.SYMBOL, Fields.NAME, Fields.IMAGE, Fields.CURRENT_PRICE, Fields.HIGH_24H, Fields.LOW_24H, Fields.TOTAL_VOLUME, Fields.MARKET_CAP, Fields.MARKET_CAP_RANK, Fields.PRICE_CHANGE_PERCENTAGE_24H, Fields.CIRCULATING_SUPPLY, Fields.LAST_UPDATED]
+CRITICAL_FIELDS = [Fields.CURRENT_PRICE, Fields.MARKET_CAP, Fields.MARKET_CAP_RANK, Fields.CIRCULATING_SUPPLY]
+
 def transform_raw_json_to_clean_df(data: list[dict[str, Any]]) -> pd.DataFrame:
   """Transforms raw JSON data to a cleaned pandas DataFrame."""
   df = _raw_json_to_clean_df(data)
@@ -52,7 +54,7 @@ def transform_raw_json_to_clean_df(data: list[dict[str, Any]]) -> pd.DataFrame:
 
 
 def _raw_json_to_clean_df(data: list[dict[str, Any]]) -> pd.DataFrame:
-  """Transforms raw JSON data to a pandas DataFrame."""
+  """Transforms raw JSON data to a pandas DataFrame with the required fields only."""
   df = pd.DataFrame(data).reindex(columns=KEEP_FIELDS)
 
   for field in KEEP_FIELDS:
@@ -85,8 +87,15 @@ def _validate_prices(df: pd.DataFrame) -> None:
 
 def _enrich_prices(df: pd.DataFrame) -> pd.DataFrame:
   """Enriches the DataFrame with additional calculated fields."""
-  df[Fields.PRICE_RANGE_24H] = df[Fields.HIGH_24H] - df[Fields.LOW_24H]
-  df[Fields.PRICE_RANGE_PCT_24H] = (df[Fields.PRICE_RANGE_24H] / df[Fields.LOW_24H]) * 100
-  df[Fields.LAST_UPDATED] = pd.to_datetime(df[Fields.LAST_UPDATED], utc=True)
+  # volume_to_market_cap_ratio
+  df[Fields.VOLUME_TO_MARKET_CAP_RATIO] = df[Fields.TOTAL_VOLUME] / df[Fields.MARKET_CAP]
 
+  # price_position_in_range
+  df[Fields.PRICE_POSITION_IN_RANGE] = (df[Fields.CURRENT_PRICE] - df[Fields.LOW_24H]) / (df[Fields.HIGH_24H] - df[Fields.LOW_24H])
+
+  # price_distance_from_high_pct
+  df[Fields.PRICE_DISTANCE_FROM_HIGH_PCT] = ((df[Fields.CURRENT_PRICE] - df[Fields.HIGH_24H]) / df[Fields.HIGH_24H]) * 100
+
+  # Convert last_updated to datetime
+  df[Fields.LAST_UPDATED] = pd.to_datetime(df[Fields.LAST_UPDATED], utc=True)
   return df
