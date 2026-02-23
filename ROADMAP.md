@@ -38,9 +38,9 @@
 - [x] Test full flow: API -> raw S3 -> transform -> clean S3
 
 ## Phase 5: Snowflake
-- [ ] Create Snowflake account (free trial)
-- [ ] Create database, schema, and tables
-- [ ] Save Snowflake credentials in `.env`
+- [x] Create Snowflake account (free trial)
+- [x] Create database, schema, and tables
+- [x] Save Snowflake credentials in `.env`
 - [ ] Write loader script (S3 -> Snowflake)
 - [ ] Test full flow: API -> S3 -> Snowflake
 
