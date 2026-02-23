@@ -21,10 +21,36 @@ def get_config() -> dict[str, str]:
   aws_s3_bucket = os.getenv("AWS_S3_BUCKET")
   if aws_s3_bucket is None:
     raise RuntimeError("AWS_S3_BUCKET is not set. Add it to your .env file.")
+  
+  # SNOWFLAKE
+  snowflake_account = os.getenv("SNOWFLAKE_ACCOUNT")
+  if snowflake_account is None:
+    raise RuntimeError("SNOWFLAKE_ACCOUNT is not set. Add it to your .env file.")
+
+  snowflake_user = os.getenv("SNOWFLAKE_USER")
+  if snowflake_user is None:
+    raise RuntimeError("SNOWFLAKE_USER is not set. Add it to your .env file.")
+
+  snowflake_password = os.getenv("SNOWFLAKE_PASSWORD")
+  if snowflake_password is None:
+    raise RuntimeError("SNOWFLAKE_PASSWORD is not set. Add it to your .env file.")
+
+  snowflake_database = os.getenv("SNOWFLAKE_DATABASE")
+  if snowflake_database is None:
+    raise RuntimeError("SNOWFLAKE_DATABASE is not set. Add it to your .env file.")
+
+  snowflake_warehouse = os.getenv("SNOWFLAKE_WAREHOUSE")
+  if snowflake_warehouse is None:
+    raise RuntimeError("SNOWFLAKE_WAREHOUSE is not set. Add it to your .env file.")
 
   return {
     "coingecko_api_key": api_key,
     "aws_access_key_id": aws_access_key_id,
     "aws_secret_access_key": aws_secret_access_key,
-    "aws_s3_bucket": aws_s3_bucket
+    "aws_s3_bucket": aws_s3_bucket,
+    "snowflake_account": snowflake_account,
+    "snowflake_user": snowflake_user,
+    "snowflake_password": snowflake_password,
+    "snowflake_database": snowflake_database,
+    "snowflake_warehouse": snowflake_warehouse
   }
