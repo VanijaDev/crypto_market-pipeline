@@ -41,8 +41,9 @@
 - [x] Create Snowflake account (free trial)
 - [x] Create database, schema, and tables
 - [x] Save Snowflake credentials in `.env`
-- [ ] Write loader script (S3 -> Snowflake)
-- [ ] Test full flow: API -> S3 -> Snowflake
+- [x] Write loader script (S3 -> Snowflake)
+- [x] Test full flow: API -> S3 -> Snowflake
+- [x] Write unit tests for `load_to_snowflake` (mock `connect`, `write_pandas`)
 
 ## Phase 6: Airflow Orchestration
 - [ ] Set up Airflow with Docker
