@@ -38,6 +38,14 @@ def get_config() -> dict[str, str]:
   snowflake_database = os.getenv("SNOWFLAKE_DATABASE")
   if snowflake_database is None:
     raise RuntimeError("SNOWFLAKE_DATABASE is not set. Add it to your .env file.")
+  
+  snowflake_table = os.getenv("SNOWFLAKE_TABLE")
+  if snowflake_table is None:
+    raise RuntimeError("SNOWFLAKE_TABLE is not set. Add it to your .env file.")
+
+  snowflake_schema = os.getenv("SNOWFLAKE_SCHEMA")
+  if snowflake_schema is None:
+    raise RuntimeError("SNOWFLAKE_SCHEMA is not set. Add it to your .env file.")
 
   snowflake_warehouse = os.getenv("SNOWFLAKE_WAREHOUSE")
   if snowflake_warehouse is None:
@@ -52,5 +60,7 @@ def get_config() -> dict[str, str]:
     "snowflake_user": snowflake_user,
     "snowflake_password": snowflake_password,
     "snowflake_database": snowflake_database,
-    "snowflake_warehouse": snowflake_warehouse
+    "snowflake_table": snowflake_table,
+    "snowflake_warehouse": snowflake_warehouse,
+    "snowflake_schema": snowflake_schema
   }
