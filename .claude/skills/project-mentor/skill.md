@@ -2,12 +2,15 @@ name: Project Mentor & Explainer
 version: 1.0.0
 description: A mentoring-focused Skill that scans this repository, explains its structure, and guides the user step by step through implementing features while teaching concepts.
 triggers:
-  - "explain this project"
-  - "mentor me on this project"
-  - "help me understand this codebase"
-  - "guide me step by step"
-  - "walk me through this feature"
-scope: repo
+
+- "explain this project"
+- "mentor me on this project"
+- "help me understand this codebase"
+- "guide me step by step"
+- "walk me through this feature"
+- "how to"
+- "guide me"
+  scope: repo
 
 ---
 
