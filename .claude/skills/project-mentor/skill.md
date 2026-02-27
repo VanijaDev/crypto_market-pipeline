@@ -3,6 +3,7 @@ version: 1.0.0
 description: A mentoring-focused Skill that scans this repository, explains its structure, and guides the user step by step through implementing features while teaching concepts.
 triggers:
 
+- "explain"
 - "explain this project"
 - "mentor me on this project"
 - "help me understand this codebase"
