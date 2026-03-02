@@ -23,7 +23,6 @@ Thumbs.db
 
 # Airflow
 airflow/logs/
-airflow/plugins/__pycache__/
 
 # Docker
 docker-compose.override.yml

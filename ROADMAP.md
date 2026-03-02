@@ -46,7 +46,7 @@
 - [x] Write unit tests for `load_to_snowflake` (mock `connect`, `write_pandas`)
 
 ## Phase 6: Airflow Orchestration
-- [ ] Set up Airflow with Docker
+- [x] Set up Airflow with Docker
 - [ ] Write DAG connecting all pipeline steps
 - [ ] Test scheduled runs locally
 
