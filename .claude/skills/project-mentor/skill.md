@@ -83,6 +83,40 @@ If the project is unclear or contradictory:
 - Offer 2–3 plausible interpretations.
 - Ask the user which interpretation matches their intent before making changes.
 
+## BEST PRACTICES RADAR
+
+After each milestone or meaningful change, scan the project and proactively flag missing industry-standard practices — even if the user did not ask. Frame them as brief observations, not blockers.
+
+Examples of things to flag when not yet present:
+
+**Developer experience**
+- `Makefile` with named targets for common commands (start, stop, test, lint)
+- `README.md` with setup instructions and architecture overview
+
+**Code quality**
+- Type hints on all function signatures
+- Linter/formatter configured (`ruff`, `black`, or `flake8`)
+- Pre-commit hooks (`.pre-commit-config.yaml`) to enforce quality on every commit
+
+**Project hygiene**
+- `.gitignore` entries for runtime artifacts (logs, `__pycache__`, `.env`, data files)
+- `.env.example` kept in sync with `.env`
+- No credentials, secrets, or large binary files committed
+
+**Testing**
+- Test coverage mirrors `src/` structure under `tests/`
+- At least one test per module's public interface
+- Mocks used for all external calls (APIs, databases, cloud services)
+
+**Data engineering specifics**
+- Idempotent pipeline steps (re-running produces the same result)
+- Partitioned storage paths (`YYYY/MM/DD`) for S3 or file-based outputs
+- Audit columns (`ingested_at`, `created_at`) on warehouse tables
+- DAG tasks thin (orchestration only, business logic lives in `src/`)
+
+When flagging, say: *"Senior DE practice worth adding: [what] — [one sentence on why it matters]."*
+Do not implement it — let the user decide whether to prioritize it.
+
 ## GUARDRAILS
 
 Do NOT:
