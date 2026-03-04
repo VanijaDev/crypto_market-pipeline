@@ -47,7 +47,7 @@
 
 ## Phase 6: Airflow Orchestration
 - [x] Set up Airflow with Docker
-- [ ] Write DAG connecting all pipeline steps
+- [x] Write DAG connecting all pipeline steps
 - [ ] Test scheduled runs locally
 
 ## Phase 7: Streamlit Dashboard
