@@ -48,7 +48,7 @@
 ## Phase 6: Airflow Orchestration
 - [x] Set up Airflow with Docker
 - [x] Write DAG connecting all pipeline steps
-- [ ] Test scheduled runs locally
+- [x] Test scheduled runs locally
 
 ## Phase 7: Streamlit Dashboard
 - [ ] Build dashboard reading from Snowflake
