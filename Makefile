@@ -15,3 +15,5 @@ airflow-stop:
 	docker compose --project-directory . -f docker/docker-compose.yaml down
 airflow-logs:
 	docker compose --project-directory . -f docker/docker-compose.yaml logs -f
+airflow-build:
+	docker compose --project-directory . -f docker/docker-compose.yaml build
