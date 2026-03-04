@@ -25,3 +25,66 @@ A portfolio project to get hands-on experience building an end-to-end data engin
 | Dashboard        | Streamlit        | Interactive visualization          |
 | Containerization | Docker           | Reproducible environments          |
 | Deployment       | Railway / Render | Hosts Airflow + dashboard publicly |
+
+## Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (with containerd image store enabled)
+- Python 3.12+
+- Accounts: [CoinGecko API](https://www.coingecko.com/en/api) (free Demo plan), AWS S3, Snowflake
+
+## Setup
+
+**1. Clone the repo and create your environment file:**
+```bash
+cp .env.example .env
+# Fill in your credentials in .env
+```
+
+**2. Create and activate a virtual environment:**
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+**3. Set your Airflow user ID (Linux/Mac):**
+```bash
+echo "AIRFLOW_UID=$(id -u)" >> .env
+```
+
+## Running Airflow
+
+```bash
+make airflow-build   # Build the custom Docker image
+make airflow-init    # Initialize the database (run once)
+make airflow-start   # Start all services in the background
+make airflow-stop    # Stop all services
+make airflow-logs    # Tail logs from all services
+```
+
+Airflow UI is available at **http://localhost:8080** (default credentials: `airflow` / `airflow`).
+
+## Project Structure
+
+```
+src/
+  extract/       # CoinGecko API client
+  transform/     # Data cleaning and transformation
+  load/          # S3 and Snowflake loaders
+  utils/         # Shared helpers (logging, config, retry)
+airflow/
+  dags/          # Airflow DAG definitions
+  config/        # Airflow configuration
+docker/
+  Dockerfile           # Custom Airflow image with project dependencies
+  docker-compose.yaml  # Full Airflow stack (scheduler, worker, webserver)
+dashboard/       # Streamlit app (coming soon)
+tests/           # Mirrors src/ structure
+config/          # SQL schemas
+```
+
+## Running Tests
+
+```bash
+make test
+```
