@@ -51,9 +51,9 @@
 - [x] Test scheduled runs locally
 
 ## Phase 7: Streamlit Dashboard
-- [ ] Build dashboard reading from Snowflake
-- [ ] Add key charts: price trends, volume, top movers
-- [ ] Test locally
+- [x] Build dashboard reading from Snowflake
+- [x] Add key charts: price trends, volume, top movers
+- [x] Test locally
 
 ## Phase 8: Deployment
 - [ ] Containerize all services (Docker)
