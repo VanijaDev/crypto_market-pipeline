@@ -57,5 +57,5 @@
 
 ## Phase 8: Deployment
 - [ ] Containerize all services (Docker)
-- [ ] Deploy to Railway / Render
-- [ ] Verify public access works
+- [x] Deploy dashboard to Streamlit Community Cloud
+- [x] Verify public access works
