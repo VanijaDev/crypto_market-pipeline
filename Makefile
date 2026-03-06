@@ -19,5 +19,5 @@ airflow-build:
 	docker compose --project-directory . -f docker/docker-compose.yaml build
 
 # Dashboard
-dashboard:
+dashboard-run:
 	PYTHONPATH=. streamlit run dashboard/app.py

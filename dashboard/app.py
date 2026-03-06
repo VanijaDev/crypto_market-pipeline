@@ -1,8 +1,11 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 import pandas as pd
 import streamlit as st
 import snowflake.connector
 
-from src.utils.config import get_config
 
 st.set_page_config(
   page_title="Crypto Market Dashboard",
@@ -12,14 +15,13 @@ st.set_page_config(
 
 @st.cache_resource
 def _get_snowflake_connection() -> snowflake.connector.SnowflakeConnection:
-  config = get_config()
   return snowflake.connector.connect( # pyright: ignore[reportUnknownMemberType]
-    user=config["snowflake_user"],
-    password=config["snowflake_password"],
-    account=config["snowflake_account"],
-    warehouse=config["snowflake_warehouse"],
-    database=config["snowflake_database"],
-    schema=config["snowflake_schema"]
+    user=os.environ["SNOWFLAKE_USER"],
+    password=os.environ["SNOWFLAKE_PASSWORD"],
+    account=os.environ["SNOWFLAKE_ACCOUNT"],
+    warehouse=os.environ["SNOWFLAKE_WAREHOUSE"],
+    database=os.environ["SNOWFLAKE_DATABASE"],
+    schema=os.environ["SNOWFLAKE_SCHEMA"]
   )
 
 @st.cache_data(ttl=300)
