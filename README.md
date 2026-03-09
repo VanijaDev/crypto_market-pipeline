@@ -2,7 +2,7 @@
 
 A production-like data engineering pipeline that automatically collects cryptocurrency market data from a public API, stores it in the cloud, transforms it, and makes it available for analytics and visualization.
 
-**Live dashboard:** [crypto-market-pipeline.streamlit.app](https://crypto-market-pipeline.streamlit.app)
+**Live dashboard:** [cryptomarket-pipelinegit-9usngr4pkyfu6x9ulfrnwq.streamlit.app](https://cryptomarket-pipelinegit-9usngr4pkyfu6x9ulfrnwq.streamlit.app)
 
 ## Goal
 
@@ -34,18 +34,19 @@ Orchestrated by **Apache Airflow** (DAG: `crypto_market_pipeline`, runs daily).
 
 ## Tech Stack
 
-| Layer            | Tool                       | Role                                    |
-| ---------------- | -------------------------- | --------------------------------------- |
-| Data extraction  | Python + httpx             | API calls, response parsing             |
-| Orchestration    | Apache Airflow             | Daily scheduled DAG                     |
-| Cloud storage    | AWS S3                     | Raw JSON and clean CSV, partitioned by date |
-| Data warehouse   | Snowflake                  | Clean data for analytics                |
-| Dashboard        | Streamlit                  | Interactive visualization               |
-| Containerization | Docker + docker-compose    | Reproducible local Airflow environment  |
+| Layer            | Tool                    | Role                                        |
+| ---------------- | ----------------------- | ------------------------------------------- |
+| Data extraction  | Python + httpx          | API calls, response parsing                 |
+| Orchestration    | Apache Airflow          | Daily scheduled DAG                         |
+| Cloud storage    | AWS S3                  | Raw JSON and clean CSV, partitioned by date |
+| Data warehouse   | Snowflake               | Clean data for analytics                    |
+| Dashboard        | Streamlit               | Interactive visualization                   |
+| Containerization | Docker + docker-compose | Reproducible local Airflow environment      |
 
 ## Data Flow
 
 Each daily run:
+
 1. Fetches market data for tracked coins from the CoinGecko `/coins/markets` endpoint
 2. Uploads raw JSON to S3 (`raw/prices/YYYY/MM/DD/prices.json`)
 3. Transforms the data — drops unused fields, computes `volume_to_market_cap_ratio`, `price_position_in_range`, `price_distance_from_high_pct`
@@ -61,12 +62,14 @@ Each daily run:
 ## Setup
 
 **1. Clone the repo and create your environment file:**
+
 ```bash
 cp .env.example .env
 # Fill in your credentials in .env
 ```
 
 **2. Create and activate a virtual environment:**
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
@@ -74,6 +77,7 @@ pip install -r requirements.txt
 ```
 
 **3. Set your Airflow user ID (Linux/Mac):**
+
 ```bash
 echo "AIRFLOW_UID=$(id -u)" >> .env
 ```
