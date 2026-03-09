@@ -2,29 +2,55 @@
 
 A production-like data engineering pipeline that automatically collects cryptocurrency market data from a public API, stores it in the cloud, transforms it, and makes it available for analytics and visualization.
 
+**Live dashboard:** [crypto-market-pipeline.streamlit.app](https://crypto-market-pipeline.streamlit.app)
+
 ## Goal
 
 A portfolio project to get hands-on experience building an end-to-end data engineering pipeline.
 
-## How It Works
+## Architecture
 
-1. **Ingest** -- A Python script fetches daily crypto data from the [CoinGecko API](https://www.coingecko.com/en/api)
-2. **Store** -- Raw data lands in AWS S3 in a partitioned format
-3. **Orchestrate** -- Apache Airflow runs the workflow automatically every day
-4. **Transform & Load** -- Processed data is loaded into a Snowflake data warehouse
-5. **Visualize** -- A public Streamlit dashboard displays key metrics and trends
+```
+CoinGecko API
+      │
+      ▼
+  fetch_prices.py          # Extract: daily market snapshot
+      │
+      ▼
+  AWS S3 (raw layer)       # raw/prices/YYYY/MM/DD/prices.json
+      │
+      ▼
+  transform_prices.py      # Clean, enrich, compute derived metrics
+      │
+      ├──► AWS S3 (clean layer)   # clean/prices/YYYY/MM/DD/prices.csv
+      │
+      └──► Snowflake (Prices table)
+                │
+                ▼
+        Streamlit Dashboard  (hosted on Streamlit Community Cloud)
+```
+
+Orchestrated by **Apache Airflow** (DAG: `crypto_market_pipeline`, runs daily).
 
 ## Tech Stack
 
-| Layer            | Tool             | Role                               |
-| ---------------- | ---------------- | ---------------------------------- |
-| Data extraction  | Python           | API calls, response parsing        |
-| Orchestration    | Apache Airflow   | Daily scheduled jobs               |
-| Cloud storage    | AWS S3           | Raw and partitioned data           |
-| Data warehouse   | Snowflake        | Clean data for analytics           |
-| Dashboard        | Streamlit        | Interactive visualization          |
-| Containerization | Docker           | Reproducible environments          |
-| Deployment       | Railway / Render | Hosts Airflow + dashboard publicly |
+| Layer            | Tool                       | Role                                    |
+| ---------------- | -------------------------- | --------------------------------------- |
+| Data extraction  | Python + httpx             | API calls, response parsing             |
+| Orchestration    | Apache Airflow             | Daily scheduled DAG                     |
+| Cloud storage    | AWS S3                     | Raw JSON and clean CSV, partitioned by date |
+| Data warehouse   | Snowflake                  | Clean data for analytics                |
+| Dashboard        | Streamlit                  | Interactive visualization               |
+| Containerization | Docker + docker-compose    | Reproducible local Airflow environment  |
+
+## Data Flow
+
+Each daily run:
+1. Fetches market data for tracked coins from the CoinGecko `/coins/markets` endpoint
+2. Uploads raw JSON to S3 (`raw/prices/YYYY/MM/DD/prices.json`)
+3. Transforms the data — drops unused fields, computes `volume_to_market_cap_ratio`, `price_position_in_range`, `price_distance_from_high_pct`
+4. Uploads clean CSV to S3 (`clean/prices/YYYY/MM/DD/prices.csv`)
+5. Loads into Snowflake `Prices` table (append — full history retained)
 
 ## Prerequisites
 
@@ -55,14 +81,31 @@ echo "AIRFLOW_UID=$(id -u)" >> .env
 ## Running Airflow
 
 ```bash
-make airflow-build   # Build the custom Docker image
-make airflow-init    # Initialize the database (run once)
-make airflow-start   # Start all services in the background
-make airflow-stop    # Stop all services
-make airflow-logs    # Tail logs from all services
+make airflow-build    # Build the custom Docker image (first time only)
+make airflow-init     # Initialize the database (first time only)
+make airflow-start    # Start all services in the background
+make airflow-stop     # Stop all services
+make airflow-logs     # Tail logs from all services
+make airflow-healthy  # Check container status
 ```
 
 Airflow UI is available at **http://localhost:8080** (default credentials: `airflow` / `airflow`).
+
+To trigger the pipeline manually: open the UI, find `crypto_market_pipeline`, and click **Trigger DAG**.
+
+## Running the Dashboard Locally
+
+```bash
+make dashboard-run
+```
+
+Opens at **http://localhost:8501**.
+
+## Running Tests
+
+```bash
+make test
+```
 
 ## Project Structure
 
@@ -78,13 +121,7 @@ airflow/
 docker/
   Dockerfile           # Custom Airflow image with project dependencies
   docker-compose.yaml  # Full Airflow stack (scheduler, worker, webserver)
-dashboard/       # Streamlit app (coming soon)
+dashboard/       # Streamlit app
 tests/           # Mirrors src/ structure
 config/          # SQL schemas
-```
-
-## Running Tests
-
-```bash
-make test
 ```
