@@ -59,3 +59,4 @@
 - [ ] Containerize all services (Docker)
 - [x] Deploy dashboard to Streamlit Community Cloud
 - [x] Verify public access works
+- [x] Add GitHub Actions workflow for daily scheduled pipeline runs
